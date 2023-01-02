@@ -8208,6 +8208,7 @@ h1, h2, h3, h4, h5,
 
 #sidebar {
   min-width: 250px;
+  min-height: 100vh !important;
   max-width: 250px;
   background: #006f79;
   color: #fff;
@@ -8334,10 +8335,3 @@ a[data-toggle="collapse"] {
   .form-control:-moz-placeholder {
     /* Firefox 18- */
     color: rgba(0, 0, 0, 0.3); }
-
-    li.active ul {
-      display: block;
-    }
-    #xd {
-      display: blcok;
-    }

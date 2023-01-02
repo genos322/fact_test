@@ -1,5 +1,11 @@
 @extends('template.layaout')
 
 @section('user')
-    <div class="mb-4">registrar ventas</div>
+    <h1>Registro de ventas</h1>
+    <div class="contentRegister">
+        <form id="frmInsertVenta" action="">
+                <div class="form-group"></div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
 @endsection
