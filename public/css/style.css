@@ -8271,11 +8271,11 @@ h1, h2, h3, h4, h5,
       height: 40px;
       border-radius: 50%; }
       #sidebar .custom-menu .btn.btn-primary {
-        background: #6749b9;
-        border-color: #6749b9; }
+        background: #006f79;
+        border-color: #006f79; }
         #sidebar .custom-menu .btn.btn-primary:hover, #sidebar .custom-menu .btn.btn-primary:focus {
-          background: #6749b9 !important;
-          border-color: #6749b9 !important; }
+          background: #006f79 !important;
+          border-color: #006f79 !important; }
 
 a[data-toggle="collapse"] {
   position: relative; }
@@ -8334,3 +8334,10 @@ a[data-toggle="collapse"] {
   .form-control:-moz-placeholder {
     /* Firefox 18- */
     color: rgba(0, 0, 0, 0.3); }
+
+    li.active ul {
+      display: block;
+    }
+    #xd {
+      display: blcok;
+    }
