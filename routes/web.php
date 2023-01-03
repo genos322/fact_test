@@ -13,6 +13,7 @@ Route::get('/home', function () {
 Route::controller(RegisterController::class)->group(function () {
     Route::match(['get', 'post'], 'user/registrarVenta', 'actionInsert')->name('user.registrarVenta');
     Route::get('user/listarVentas', 'actionList')->name('user.listarVentas');
+    Route::post('/search', 'actionSearch')->name('user.search');
 });
 Route::get('user/listarVentas', function () {
     return view('user.listarVentas');

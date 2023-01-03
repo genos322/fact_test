@@ -8210,7 +8210,7 @@ h1, h2, h3, h4, h5,
   min-width: 250px;
   min-height: 100vh !important;
   max-width: 250px;
-  background: #006f79;
+  background: #000000;
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -8303,8 +8303,8 @@ h1, h2, h3, h4, h5,
       height: 40px;
       border-radius: 50%; }
       #sidebar .custom-menu .btn.btn-primary {
-        background: #006f79;
-        border-color: #006f79; }
+        background: #252626;
+        border-color: #252626; }
         #sidebar .custom-menu .btn.btn-primary:hover, #sidebar .custom-menu .btn.btn-primary:focus {
           background: #006f79 !important;
           border-color: #006f79 !important; }
@@ -8366,3 +8366,6 @@ a[data-toggle="collapse"] {
   .form-control:-moz-placeholder {
     /* Firefox 18- */
     color: rgba(0, 0, 0, 0.3); }
+body{
+  background-color: #937f7f;
+}

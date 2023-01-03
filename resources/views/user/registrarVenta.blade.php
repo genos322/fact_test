@@ -2,9 +2,9 @@
 
 @section('user')
     <h1>Registro de ventas</h1>
-    <div class="contentRegister" onload="validation()">
-        <form id="frmInsertVenta" action="{{ url('user/registrarVenta')}}" method="post">
-            @csrf
+    <div class="contentRegister">
+        <form id="frmInsertVenta" action="{{ url('/search')}}" method="post">
+            <input type="text" id="idTokenCsrf" value="{{csrf_token()}}" hidden>
             <div class="firstCol">
                 <div class="form-group">
                     <label for="txtComprobante" class="txtTitle" style="">Comprobante</label>
@@ -25,36 +25,43 @@
                 <div class="form-group" id="idContentRuc" style="display:none;">
                     <label for="txtRuc" class="txtTitle">RUC</label>
                     <br>
-                    <input type="text" id="idRuc">
+                    <input type="text" name="idRuc" id="idRuc">
                 </div>
                 <div class="form-group" id="idContentRazonSocial" style="display: none;">
                     <label for="txtRazonSocial" class="txtTitle">Razón social</label>
-                    <input type="text" id="idRazonSocial">
-                </div>
+                    <br>
+                    <input type="text" name="idRazonSocial" id="idRazonSocial">
+                </div>@csrf
                 <div class="form-group" id="idContentDni">
                     <label for="txtDni" class="txtTitle" style="margin-right: 2rem">DNI</label>
                     <br>
-                    <input type="text" id="idDni">
+                    <input type="text" name="idDni" id="idDni">
                 </div>
                 <div class="form-group" id="idContentNameClient">
                     <label for="txtNameClient" class="txtTitle">Nombre cliente</label>
                     <br>
-                    <input type="text" id="idNameClient">
+                    <input type="text" name="idNameClient" id="idNameClient">
                 </div>
                 <div class="form-group" id="idLastName">
                     <label for="txtLastName" class="txtTitle">Apellido cliente</label>
                     <br>
-                    <input type="text" id="idLastName">
+                    <input type="text" name="idLastName" id="idLastName">
                 </div>
                 <div class="form-group">
                     <label for="txtAddress" class="txtTitle">Dirección</label>
                     <br>
-                    <input type="text" id="idAddress">
+                    <input type="text" name="idAddress" id="idAddress">
                 </div>
             </div>
             <div class="secondCol">
                 <div class="form-group searchBox">
                     <input type="text" placeholder="Busca prouducto..." id="idSearchProduct">
+                </div>
+                <div>
+                    <select name="" id="">
+                        <option value="aas"></option>
+                        <option value="aas">asa</option>
+                    </select>
                 </div>
                 <table class="table">
                     <thead>
@@ -83,17 +90,17 @@
                 <div class="form-group">
                     <label for="montoPago" class="txtTitle">Monto pago</label>
                     <br>
-                    <input type="text" id="idMontoPago">
+                    <input type="text" name="idMontoPago" id="idMontoPago">
                 </div>  
                 <div class="form-group">
                     <label for="totalCobrar" class="txtTitle">Total a cobrar</label>
                     <br>
-                    <input type="text" id="idTotalCobrar" disabled>
+                    <input type="text" name="idTotalCobrar" id="idTotalCobrar" disabled>
                 </div>
                 <div class="form-group">
                     <label for="vuelto" class="txtTitle">Vuelto</label>
                     <br>
-                    <input type="text" id="idVuelto" disabled>
+                    <input type="text" name="idVuelto" id="idVuelto" disabled>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Registrar</button>

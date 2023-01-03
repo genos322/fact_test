@@ -7,6 +7,26 @@ window.onload = function() {
     dni.addEventListener('input', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+    //crea una función que haga peticiones a la ruta '/search', cada vez que se escriba en un input con id 'idSearchProduct
+    const token = document.getElementById('idTokenCsrf').value;
+    const search = document.getElementById('idSearchProduct');
+    search.addEventListener('input', function() {
+            fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token,
+                  },
+                body: JSON.stringify({
+                    search: search.value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            });  
+    });
+    
 }
 const selectComprobante = document.getElementById('selectComprobante');
 
