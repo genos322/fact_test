@@ -2,36 +2,46 @@
 
 @section('user')
     <h1>Registro de ventas</h1>
-    <div class="contentRegister">
-        <form id="frmInsertVenta" action="">
+    <div class="contentRegister" onload="validation()">
+        <form id="frmInsertVenta" action="{{ url('user/registrarVenta')}}" method="post">
+            @csrf
             <div class="firstCol">
                 <div class="form-group">
                     <label for="txtComprobante" class="txtTitle" style="">Comprobante</label>
                     <br>
                     <select name="comprobante" id="selectComprobante">
-                        <option value="opBoleta">Boleta</option>
-                        <option value="opFactura">Factura</option>
+                        <option value="Boleta">Boleta</option>
+                        <option value="Factura">Factura</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="idContentTypeClient">
                     <label for="txtTypeClient" class="txtTitle">Tipo de Cliente</label>
                     <br>
-                    <select name="tiypeClient" id="selectTypeClien">
-                        <option value="opNatural">Natural</option>
-                        <option value="opJuridica">Jurídico</option>
+                    <select name="tiypeClient" id="selectTypeClient">
+                        <option value="Natural">Natural</option>
+                        <option value="Juridica">Jurídico</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="idContentRuc" style="display:none;">
+                    <label for="txtRuc" class="txtTitle">RUC</label>
+                    <br>
+                    <input type="text" id="idRuc">
+                </div>
+                <div class="form-group" id="idContentRazonSocial" style="display: none;">
+                    <label for="txtRazonSocial" class="txtTitle">Razón social</label>
+                    <input type="text" id="idRazonSocial">
+                </div>
+                <div class="form-group" id="idContentDni">
                     <label for="txtDni" class="txtTitle" style="margin-right: 2rem">DNI</label>
                     <br>
-                    <input type="txt" id="idDni">
+                    <input type="text" id="idDni">
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="idContentNameClient">
                     <label for="txtNameClient" class="txtTitle">Nombre cliente</label>
                     <br>
-                    <input type="txt" id="idNameClient">
+                    <input type="text" id="idNameClient">
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="idLastName">
                     <label for="txtLastName" class="txtTitle">Apellido cliente</label>
                     <br>
                     <input type="text" id="idLastName">
@@ -91,4 +101,5 @@
             </div>
         </form>
     </div>
+    <script src="{{ asset('viewresource/register.js')}}"></script>
 @endsection
