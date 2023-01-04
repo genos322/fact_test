@@ -38,6 +38,8 @@ window.onload = function () {
     const table = document.getElementById('idTable');
     // const nameCelda = table.querySelector("tr:first-child td:nth-child(1)");
     const cantidadCelda = table.querySelector("tr:first-child td:nth-child(2)");
+
+    let addTotal = 0;//variable para sumar el total
     selectDivSearch.addEventListener('DOMSubtreeModified', function () {
         if (selectDivSearch.innerHTML !== '') {
             //si no existe el producto en la tabla, lo crea
@@ -50,10 +52,6 @@ window.onload = function () {
                 const tdIgv = document.createElement('td');
                 const tdTotal = document.createElement('td');
 
-                const tr2 = document.createElement('tr');
-                const tdSubtotalProductoTotal = document.createElement('td');
-                const tdIgvTotal = document.createElement('td');
-                
                 tdNameProducto.id = selectDivSearch.innerHTML.split(' ').join('');
                 tdNameProducto.innerHTML = selectDivSearch.innerHTML;
                 tdCantidadProducto.id = selectDivSearch.innerHTML.split(' ').join('') + 'Cantidad';
@@ -68,24 +66,32 @@ window.onload = function () {
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
+                    console.log({ addTotal });
+                    addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'cevichesimple') {
                     tdPrecioProducto.innerHTML = 15;
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
+                    console.log({ addTotal });
+                    addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'arrozconmariscos') {
                     tdPrecioProducto.innerHTML = 23;
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
+                    console.log({ addTotal });
+                    addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'Chicharróndepescado') {
                     tdPrecioProducto.innerHTML = 28;
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
+                    console.log({ addTotal });
+                    addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 tr.appendChild(tdNameProducto);
                 tr.appendChild(tdPrecioProducto);
@@ -93,69 +99,61 @@ window.onload = function () {
                 tr.appendChild(tdSubtotalProducto);
                 tr.appendChild(tdIgv);
                 tr.appendChild(tdTotal);
-
-                tr2
                 table.appendChild(tr);
 
+                const idTotalCobrar = document.getElementById('idTotalCobrar');
+                idTotalCobrar.value = addTotal;
 
             }
             else {
-
-
                 //si existe el producto en la tabla, aumenta la cantidad
                 const tdCantidadProducto = document.getElementById(selectDivSearch.innerHTML.split(' ').join('') + 'Cantidad');
-                const tdNameProducto = document.getElementById(selectDivSearch.innerHTML.split(' ').join(''));
                 const tdPrecioProducto = document.getElementById(selectDivSearch.innerHTML.split(' ').join('') + 'Precio');
                 const tdSubtotalProducto = document.getElementById(selectDivSearch.innerHTML.split(' ').join('') + 'Subtotal');
                 const tdIgv = document.getElementById(selectDivSearch.innerHTML.split(' ').join('') + 'Igv');
                 const tdTotal = document.getElementById(selectDivSearch.innerHTML.split(' ').join('') + 'Total');
-                // const nameCeldamixto = document.querySelector('#cevichemixto').innerHTML.replace(/\s/g, '');
-                // const nameCeldasimple = document.querySelector('#cevichesimple').innerHTML.replace(/\s/g, '');
-                // const nameCeldaarroz = document.querySelector('#arrozconmariscos').innerHTML.replace(/\s/g, '');
-                // const nameCeldachicharron = document.querySelector('#Chicharróndepescado').innerHTML.replace(/\s/g, '');
-                const selectDivSearch2 = selectDivSearch.innerHTML.replace(/\s/g, '');
+                const selectDivSearch2 = selectDivSearch.innerHTML.replace(/\s/g, '');//nombre del producto sin espacios
                 tdCantidadProducto.innerHTML = parseInt(tdCantidadProducto.innerHTML) + 1;
                 if (selectDivSearch2 == 'cevichemixto') {
                     tdPrecioProducto.innerHTML = 20;
-                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)* 18 / 100);
+                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) * 18 / 100;
                     tdTotal.innerHTML = parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML);
+                    addTotal += parseFloat(tdPrecioProducto.innerHTML);
                 }
-                if(selectDivSearch2 == 'cevichesimple'){
+                if (selectDivSearch2 == 'cevichesimple') {
                     tdPrecioProducto.innerHTML = 15;
-                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)* 18 / 100);
+                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) * 18 / 100;
                     tdTotal.innerHTML = parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML);
+                    addTotal += parseFloat(tdPrecioProducto.innerHTML);
                 }
-                if(selectDivSearch2 == 'arrozconmariscos'){
+                if (selectDivSearch2 == 'arrozconmariscos') {
                     tdPrecioProducto.innerHTML = 23;
-                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)* 18 / 100);
+                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) * 18 / 100;
                     tdTotal.innerHTML = parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML);
+                    addTotal += parseFloat(tdPrecioProducto.innerHTML);
                 }
-                if(selectDivSearch2 == 'Chicharróndepescado'){
+                if (selectDivSearch2 == 'Chicharróndepescado') {
                     tdPrecioProducto.innerHTML = 28;
-                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)* 18 / 100);
+                    tdSubtotalProducto.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) - (parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = (parseFloat(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML)) * 18 / 100;
                     tdTotal.innerHTML = parseInt(tdPrecioProducto.innerHTML) * parseInt(tdCantidadProducto.innerHTML);
+                    addTotal += parseFloat(tdPrecioProducto.innerHTML);
                 }
+                const idTotalCobrar = document.getElementById('idTotalCobrar');
+                idTotalCobrar.value = addTotal;
             }
         }
+        const idMontoPago = document.getElementById('idMontoPago');
+        const idVuelto = document.getElementById('idVuelto');
+        const idTotalCobrar = document.getElementById('idTotalCobrar');
+        console.log(idMontoPago);
+        idMontoPago.addEventListener('input', () => {
+            idVuelto.value = parseFloat(idMontoPago.value) - parseFloat(idTotalCobrar.value);
+        });
     });
-    //crea un evento del selectProducto que añada el producto a la tabla en el td con id 'tdNameProducto'
-    selectProduto.addEventListener('change', function () {
-        console.log(selectProduto.value)
-        const tr = document.createElement('tr');
-        const tdNameProducto = document.createElement('td');
-        tdNameProducto.id = selectProduto.value;
-        tdNameProducto.innerHTML = selectProduto.value;
-        tr.appendChild(tdNameProducto);
-        table.appendChild(tr);
-    });
-    selectProduto.addEventListener('change', function () {
-        //coloca el valor del select en el input
-    });
-
 }
 const selectComprobante = document.getElementById('selectComprobante');
 
