@@ -4,6 +4,7 @@
 <head>
     <title>Sidebar 02</title>
     <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/styleVenta.css')}}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+ 
 </head>
 
 <body>

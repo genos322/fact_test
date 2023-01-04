@@ -3,8 +3,8 @@
 @section('user')
     <h1>Registro de ventas</h1>
     <div class="contentRegister">
-        <form id="frmInsertVenta" action="{{ url('/search')}}" method="post">
-            <input type="text" id="idTokenCsrf" value="{{csrf_token()}}" hidden>
+        <form id="frmInsertVenta" action="{{ url('user/registrarVenta') }}" method="post">
+            <input type="text" id="idTokenCsrf" value="{{ csrf_token() }}" hidden>
             <div class="firstCol">
                 <div class="form-group">
                     <label for="txtComprobante" class="txtTitle" style="">Comprobante</label>
@@ -55,58 +55,135 @@
             </div>
             <div class="secondCol">
                 <div class="form-group searchBox">
-                    <input type="text" placeholder="Busca prouducto..." id="idSearchProduct">
-                </div>
-                <div>
-                    <select name="" id="">
-                        <option value="aas"></option>
-                        <option value="aas">asa</option>
-                    </select>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nombre del producto</th>
-                            <th>Precio v.u.</th>
-                            <th>Cantidad</th>
-                            <th>Sub total</th>
-                            <th>IGV</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Producto 1</td>
-                            <td>1</td>
-                            <td>100</td>
-                            <td>100</td>
-                            <td>18%</td>
-                            <td>null</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    {{-- <input type="text" placeholder="Busca prouducto..." id="idSearchProduct" style="position: relative">
+                    <select name="selectSearch" id="idSearchProducto" style="width:20px;">
+                        <option value="..." id="idOptionProducto">...</option>
+                    </select> --}}
+                    <div class="select-box">
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" class="radio" id="automobiles" name="category" />
+                                <label for="cevicheSimple">ceviche simple</label>
+                            </div>
+
+                            <div class="option">
+                                <input type="radio" class="radio" id="film" name="category" />
+                                <label for="cevicheMixto">ceviche mixto</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" class="radio" id="film" name="category" />
+                                <label for="arrozMarisco">arroz con mariscos</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" class="radio" id="film" name="category" />
+                                <label for="chicharronPescado">Chicharrón de pescado</label>
+                            </div>
+                        </div>
+
+                        <div class="selected">...</div>
+
+                        <div class="search-box">
+                            <input type="text" placeholder="Escriba aquí..." />
+                        </div>
+                    </div>
             </div>
-            <div class="terCol">
-                <div class="form-group">
-                    <label for="montoPago" class="txtTitle">Monto pago</label>
-                    <br>
-                    <input type="text" name="idMontoPago" id="idMontoPago">
-                </div>  
-                <div class="form-group">
-                    <label for="totalCobrar" class="txtTitle">Total a cobrar</label>
-                    <br>
-                    <input type="text" name="idTotalCobrar" id="idTotalCobrar" disabled>
+                    <table class="table" id="idTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre del producto</th>
+                                <th>Precio v.u.</th>
+                                <th>Cantidad</th>
+                                <th>Sub total</th>
+                                <th>IGV</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- <tr>
+                                <td class="tdNameProducto"></td>
+                                <td class="tdPrecio">1</td>
+                                <td class="tdCantidad">100</td>
+                                <td class="tdSubtotal">100</td>
+                                <td>18%</td>
+                                <td class="tdTotal">null</td>
+                            </tr> --}}
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <label for="vuelto" class="txtTitle">Vuelto</label>
-                    <br>
-                    <input type="text" name="idVuelto" id="idVuelto" disabled>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-            </div>
+                <div class="terCol">
+                    <div class="form-group">
+                        <label for="montoPago" class="txtTitle">Monto pago</label>
+                        <br>
+                        <input type="text" name="idMontoPago" id="idMontoPago">
+                    </div>
+                    <div class="form-group">
+                        <label for="totalCobrar" class="txtTitle">Total a cobrar</label>
+                        <br>
+                        <input type="text" name="idTotalCobrar" id="idTotalCobrar" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="vuelto" class="txtTitle">Vuelto</label>
+                        <br>
+                        <input type="text" name="idVuelto" id="idVuelto" disabled>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
         </form>
     </div>
-    <script src="{{ asset('viewresource/register.js')}}"></script>
+    <script>
+        const selectedAll = document.querySelectorAll(".selected");
+
+        selectedAll.forEach((selected) => {
+            const optionsContainer = selected.previousElementSibling;
+            const searchBox = selected.nextElementSibling;
+
+            const optionsList = optionsContainer.querySelectorAll(".option");
+
+            selected.addEventListener("click", () => {
+                if (optionsContainer.classList.contains("active")) {
+                    optionsContainer.classList.remove("active");
+                } else {
+                    let currentActive = document.querySelector(".options-container.active");
+
+                    if (currentActive) {
+                        currentActive.classList.remove("active");
+                    }
+
+                    optionsContainer.classList.add("active");
+                }
+
+                searchBox.value = "";
+                filterList("");
+
+                if (optionsContainer.classList.contains("active")) {
+                    searchBox.focus();
+                }
+            });
+
+            optionsList.forEach((o) => {
+                o.addEventListener("click", () => {
+                    selected.innerHTML = o.querySelector("label").innerHTML;
+                    optionsContainer.classList.remove("active");
+                });
+            });
+
+            searchBox.addEventListener("keyup", function(e) {
+                filterList(e.target.value);
+            });
+
+            const filterList = (searchTerm) => {
+                searchTerm = searchTerm.toLowerCase();
+                optionsList.forEach((option) => {
+                    let label = option.firstElementChild.nextElementSibling.innerText.toLowerCase();
+                    if (label.indexOf(searchTerm) != -1) {
+                        option.style.display = "block";
+                    } else {
+                        option.style.display = "none";
+                    }
+                });
+            };
+        });
+    </script>
+    <script src="{{ asset('viewresource/register.js') }}"></script>
 @endsection
