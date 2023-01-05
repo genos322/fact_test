@@ -206,3 +206,25 @@ selectTypeClient.addEventListener('change', function () {
         idLastName.style.display = 'block';
     }
 });
+
+//enviando formulario
+function sendForm(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Desea emitir el comprobante?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Guardado',
+        denyButtonText: `No guardado`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Guardado con éxito!', '', 'success');
+          document.getElementById('miForm').submit();
+          
+        } else if (result.isDenied) {
+          Swal.fire('Cambios no guardados', '', 'info');
+        }
+      })
+  }
+  

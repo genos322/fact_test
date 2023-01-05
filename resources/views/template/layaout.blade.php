@@ -67,6 +67,7 @@
         <script src="{{ asset('js/document/popper.js') }}"></script>
         <script src="{{ asset('js/document/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/document/main.js') }}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
