@@ -14,14 +14,61 @@ class RegisterController extends Controller
     public function actionInsert(Request $request)
     {
         if($_POST)
-        {    return $request;   
+        {
             try{
-                date_default_timezone_set('America/Lima');
                 DB::BeginTransaction();
                 $tventa = new TVenta();
-                $tventa->idVenta = uniqid();
+                $countComprobanteB = 0;
+                $countComprobanteF = 0;
+                $nameComprobante = '';
+
+                if($request->comprobante == 'Boleta')
+                {
+                    if(TVenta::max('numberComprobanteBoleta'))
+                    {
+                        $countComprobanteB = 1;
+                        $nameComprobante = "B001-" . "1";
+                    }
+                    else
+                    {
+                        $countComprobanteB = TVenta::max('numberComprobanteBoleta') + 1;
+                        $nameComprobante = "B001-" . $countComprobante;
+                    }
+                }
+                if($request->comprobante == 'Factura')
+                {
+                    if(TVenta::max('numberComprobanteFactura'))
+                    {
+                        $countComprobanteF = 1;
+                        $nameComprobante = "F001-" . "1";
+                    }
+                    else
+                    {
+                        $countComprobanteF = TVenta::max('numberComprobanteFactura') + 1;
+                        $nameComprobante = "F001-" . $countComprobante;
+                    }
+                }
+
+
+                $arr = ['cevichemixtoCantidad','cevichesimpleCantidad','arrozconmariscosCantidad','ChicharróndepescadoCantidad'];
+                $arrProductos = array();
+                foreach($arr as $item)
+                {
+                    if(isset($request->$item))
+                    {
+                        //se concatena un nuevo atributo al objeto
+                        $concat = $item.$request->$item;
+                        array_push($arrProductos, $concat);
+                    }
+                }
+                date_default_timezone_set('America/Lima');
+
+                // $tventa->idVenta = uniqid();
                 $tventa->idProducto = uniqid();
                 $tventa->comprobante = $request->comprobanteBoleta;
+                $tventa->numberComprobanteBoleta = $countComprobanteB;
+                $tventa->numberComprobanteFactura = $countComprobanteF;
+                $tventa->nameComprobante = $nameComprobante;
                 $tventa->typeClient = $request->typeClient;
                 $tventa->razonSocial = $request->idRazonSocial;
                 $tventa->dni = $request->idDni;
@@ -32,6 +79,7 @@ class RegisterController extends Controller
                 $tventa->igv = $request->idTotalCobrar * 18/100;
                 $tventa->subTotal = $request->idTotalCobrar - $tventa->igv;
                 $tventa->priceTotal = $request->idTotalCobrar;
+                $tventa->productoCantidad = json_encode($arrProductos, JSON_UNESCAPED_UNICODE);//el json_unescaped.. para que permita caracters unicode(tidles,etc)
                 $tventa->save();
                 
 
@@ -48,6 +96,7 @@ class RegisterController extends Controller
     }
     public function actionList()
     {
+        
         return view('user.listarVentas');
     }
     public function actionSearch(Request $request)

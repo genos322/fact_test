@@ -8,7 +8,7 @@ class TVenta extends Model
 {
     protected $table = 'tventa';
     protected $primaryKey = 'idVenta';
-    public $incrementing = false;
+    public $incrementing = true;
     public $timestamps = true;
     // function tProducto()
     // {
