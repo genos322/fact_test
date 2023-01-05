@@ -1,8 +1,7 @@
 create table tventa(
-idVenta varchar(8),
-idProducto varchar(8),
-comprobanteBoleta varchar(15),
-comprobanteFactura varchar(15),
+idVenta varchar(13),
+idProducto varchar(13),
+comprobante varchar(15),
 typeClient varchar(20),
 dni varchar(8),
 ruc varchar(15),
@@ -10,14 +9,13 @@ razonSocial varchar(200),
 nameClient varchar(100),
 lastName varchar(100),
 addressClient varchar(100),
-amount int,
 fechaEmision datetime,
+igv decimal(10,2),
 subTotal decimal(10,2),
 priceTotal decimal(10,2),
 created_at datetime ,
 updated_at datetime,
-primary key (idVenta),
-foreign key (idProducto) references tproducto(idProducto)
+primary key (idVenta)
 );
 
 create table tproducto(

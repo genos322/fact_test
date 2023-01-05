@@ -66,7 +66,6 @@ window.onload = function () {
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
-                    console.log({ addTotal });
                     addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'cevichesimple') {
@@ -74,7 +73,6 @@ window.onload = function () {
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
-                    console.log({ addTotal });
                     addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'arrozconmariscos') {
@@ -82,7 +80,6 @@ window.onload = function () {
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
-                    console.log({ addTotal });
                     addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'Chicharróndepescado') {
@@ -90,7 +87,6 @@ window.onload = function () {
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);
                     tdIgv.innerHTML = parseFloat(tdPrecioProducto.innerHTML) * 18 / 100;
                     tdTotal.innerHTML = tdPrecioProducto.innerHTML;
-                    console.log({ addTotal });
                     addTotal += parseFloat(tdTotal.innerHTML);
                 }
                 tr.appendChild(tdNameProducto);
@@ -100,6 +96,13 @@ window.onload = function () {
                 tr.appendChild(tdIgv);
                 tr.appendChild(tdTotal);
                 table.appendChild(tr);
+                
+                //Para enviar al form
+                const input = document.createElement('input');
+                document.getElementById('frmInsertVenta').appendChild(input);//inserta el input en el formulario
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', selectDivSearch.innerHTML.split(' ').join('') + 'Cantidad');
+                input.value = 1;
 
                 const idTotalCobrar = document.getElementById('idTotalCobrar');
                 idTotalCobrar.value = addTotal;
@@ -144,15 +147,20 @@ window.onload = function () {
                 }
                 const idTotalCobrar = document.getElementById('idTotalCobrar');
                 idTotalCobrar.value = addTotal;
+
+                //cantidad de producto obteniendo por name
+                const input = document.getElementsByName(selectDivSearch.innerHTML.split(' ').join('') + 'Cantidad')[0];
+                input.value = parseInt(input.value) + 1;
             }
         }
         const idMontoPago = document.getElementById('idMontoPago');
         const idVuelto = document.getElementById('idVuelto');
         const idTotalCobrar = document.getElementById('idTotalCobrar');
-        console.log(idMontoPago);
+
         idMontoPago.addEventListener('input', () => {
             idVuelto.value = parseFloat(idMontoPago.value) - parseFloat(idTotalCobrar.value);
         });
+
     });
 }
 const selectComprobante = document.getElementById('selectComprobante');

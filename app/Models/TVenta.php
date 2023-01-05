@@ -10,10 +10,10 @@ class TVenta extends Model
     protected $primaryKey = 'idVenta';
     public $incrementing = false;
     public $timestamps = true;
-    function tProducto()
-    {
-        return $this->belongsToMany(TProducto::class,'idVenta');
-    }
+    // function tProducto()
+    // {
+    //     return $this->belongsToMany(TProducto::class,'idVenta');
+    // }
 
 }
 ?>

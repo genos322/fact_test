@@ -11,10 +11,10 @@ class TProducto extends Model
     public $incrementing = false;
     public $timestamps = true;
 
-    public function tVenta()
-    {
-        return $this->hasMany(TVenta::class,'idProducto');
-    }
+    // public function tVenta()
+    // {
+    //     return $this->hasMany(TVenta::class,'idProducto');
+    // }
 
 }
 ?>

@@ -17,7 +17,7 @@
                 <div class="form-group" id="idContentTypeClient">
                     <label for="txtTypeClient" class="txtTitle">Tipo de Cliente</label>
                     <br>
-                    <select name="tiypeClient" id="selectTypeClient">
+                    <select name="typeClient" id="selectTypeClient">
                         <option value="Natural">Natural</option>
                         <option value="Juridica">Jurídico</option>
                     </select>
@@ -119,7 +119,7 @@
                     <div class="form-group">
                         <label for="totalCobrar" class="txtTitle">Total a cobrar</label>
                         <br>
-                        <input type="text" name="idTotalCobrar" id="idTotalCobrar" disabled>
+                        <input type="text" name="idTotalCobrar" id="idTotalCobrar" >
                     </div>
                     <div class="form-group">
                         <label for="vuelto" class="txtTitle">Vuelto</label>
