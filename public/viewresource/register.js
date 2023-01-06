@@ -220,7 +220,7 @@ function sendForm(e) {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           Swal.fire('Guardado con éxito!', '', 'success');
-          document.getElementById('miForm').submit();
+          document.getElementById('frmInsertVenta').submit();
           
         } else if (result.isDenied) {
           Swal.fire('Cambios no guardados', '', 'info');

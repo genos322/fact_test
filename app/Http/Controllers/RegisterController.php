@@ -21,10 +21,9 @@ class RegisterController extends Controller
                 $countComprobanteB = 0;
                 $countComprobanteF = 0;
                 $nameComprobante = '';
-
                 if($request->comprobante == 'Boleta')
                 {
-                    if(TVenta::max('numberComprobanteBoleta'))
+                    if(TVenta::max('numberComprobanteBoleta')==(''||0))
                     {
                         $countComprobanteB = 1;
                         $nameComprobante = "B001-" . "1";
@@ -32,12 +31,12 @@ class RegisterController extends Controller
                     else
                     {
                         $countComprobanteB = TVenta::max('numberComprobanteBoleta') + 1;
-                        $nameComprobante = "B001-" . $countComprobante;
+                        $nameComprobante = "B001-" . $nameComprobante;
                     }
                 }
                 if($request->comprobante == 'Factura')
                 {
-                    if(TVenta::max('numberComprobanteFactura'))
+                    if(TVenta::max('numberComprobanteFactura')==(''||0))
                     {
                         $countComprobanteF = 1;
                         $nameComprobante = "F001-" . "1";
@@ -45,10 +44,9 @@ class RegisterController extends Controller
                     else
                     {
                         $countComprobanteF = TVenta::max('numberComprobanteFactura') + 1;
-                        $nameComprobante = "F001-" . $countComprobante;
+                        $nameComprobante = "F001-" . $nameComprobante;
                     }
                 }
-
 
                 $arr = ['cevichemixtoCantidad','cevichesimpleCantidad','arrozconmariscosCantidad','ChicharróndepescadoCantidad'];
                 $arrProductos = array();
