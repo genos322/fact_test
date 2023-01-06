@@ -59,6 +59,10 @@ class RegisterController extends Controller
                         array_push($arrProductos, $concat);
                     }
                 }
+                if($request->nameClient == null)
+                {
+                    $nameClient = 'Anónimo';
+                }
                 date_default_timezone_set('America/Lima');
 
                 // $tventa->idVenta = uniqid();
@@ -70,7 +74,7 @@ class RegisterController extends Controller
                 $tventa->typeClient = $request->typeClient;
                 $tventa->razonSocial = $request->idRazonSocial;
                 $tventa->dni = $request->idDni;
-                $tventa->nameClient = $request->idNameClient;
+                $tventa->nameClient = $nameClient;
                 $tventa->lastName = $request->idLastName;
                 $tventa->addressClient = $request->idAddress;
                 $tventa->fechaEmision = date('y-m-d h:i:s');
@@ -82,20 +86,22 @@ class RegisterController extends Controller
                 
 
                 DB::commit();
+                
+                return redirect()->route('user.listarVentas')->with('success', 'Venta registrada correctamente');
             }
             catch(\Exception $e)
             {
                 DB::rollback();
                 return dd($e);
-                return redirect()->route('user.registrarVenta')->with('error', $e->getMessage());
+                return redirect()->route('user.listarVentas')->with('error', $e->getMessage());
             }
         }
         return view('user.registrarVenta');
     }
     public function actionList()
     {
-        
-        return view('user.listarVentas');
+        $tventa = TVenta::all();   
+        return view('user.listarVentas', compact('tventa'));
     }
     public function actionSearch(Request $request)
     {

@@ -325,3 +325,16 @@ h2 {
     opacity: 1;
     pointer-events: auto;
   }
+  .contentList{
+    width: 100%;
+    height: 80vh;
+    background-color: rgb(255 255 255 / 50%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(255 255 255 / 50%);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    overflow: auto;
+  }

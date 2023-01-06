@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PdfController;
 
 Route::get('/', function () {
     return Redirect('/home');
@@ -15,6 +16,9 @@ Route::controller(RegisterController::class)->group(function () {
     Route::get('user/listarVentas', 'actionList')->name('user.listarVentas');
     Route::post('/search', 'actionSearch')->name('user.search');
 });
-Route::get('user/listarVentas', function () {
-    return view('user.listarVentas');
-})->name('user.listarVentas');
+Route::controller(PdfController::class)->group(function () {
+    
+});
+// Route::get('user/listarVentas', function () {
+//     return view('user.listarVentas');
+// })->name('user.listarVentas');
