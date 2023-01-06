@@ -132,6 +132,16 @@
         </form>
     </div>
     <script>
+      console.log(JSON.stringify({{json_encode($venta->productoCantidad)}}))
+
+        const json = JSON.parse(JSON.stringify(string));
+
+        json.forEach(function(item) {
+        console.log(item);
+        });
+
+    </script>
+    <script>
         const selectedAll = document.querySelectorAll(".selected");
 
         selectedAll.forEach((selected) => {

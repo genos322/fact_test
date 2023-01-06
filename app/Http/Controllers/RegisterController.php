@@ -58,9 +58,13 @@ class RegisterController extends Controller
                         array_push($arrProductos, $concat);
                     }
                 }
-                if($request->nameClient == null)
+                if($request->idNameClient == null)
                 {
                     $nameClient = 'Anónimo';
+                }
+                else
+                {
+                    $nameClient = $request->idNameClient;
                 }
                 date_default_timezone_set('America/Lima');
 
@@ -95,7 +99,10 @@ class RegisterController extends Controller
                 return redirect()->route('user.listarVentas')->with('error', $e->getMessage());
             }
         }
-        return view('user.registrarVenta');
+        $venta = TVenta::find('2');
+        $json = json_decode($venta->productoCantidad);
+        $venta->productoCantidad = json_encode($json);
+        return view('user.registrarVenta', compact('venta'));
     }
     public function actionList()
     {
