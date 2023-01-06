@@ -17,7 +17,7 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/search', 'actionSearch')->name('user.search');
 });
 Route::controller(PdfController::class)->group(function () {
-    
+    Route::get('pdf/ticket/{idVenta}', 'actionPdf')->name('pdf.ticket');
 });
 // Route::get('user/listarVentas', function () {
 //     return view('user.listarVentas');

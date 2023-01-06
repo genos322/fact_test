@@ -23,7 +23,7 @@
                                 <td>{{ $venta->nameClient }}</td>
                                 <td>{{ $venta->priceTotal }}</td>
                                 <td>
-                                    <a href="{{ url('pdf/ticket/' . $venta->id) }}" class="btn btn-success"><i class="ion-printer"></i></a>
+                                    <a href="{{ url('pdf/ticket/' . $venta->idVenta) }}" class="btn btn-success" target="_blank" ><i class="ion-printer"></i></a>
                                 </td>
                             </tr>
                         @endforeach
