@@ -31,7 +31,7 @@ class RegisterController extends Controller
                     else
                     {
                         $countComprobanteB = TVenta::max('numberComprobanteBoleta') + 1;
-                        $nameComprobante = "B001-" . $nameComprobante;
+                        $nameComprobante = "B001-" . $countComprobanteB;
                     }
                 }
                 if($request->comprobante == 'Factura')
@@ -44,7 +44,7 @@ class RegisterController extends Controller
                     else
                     {
                         $countComprobanteF = TVenta::max('numberComprobanteFactura') + 1;
-                        $nameComprobante = "F001-" . $nameComprobante;
+                        $nameComprobante = "F001-" . $countComprobanteF;
                     }
                 }
 
