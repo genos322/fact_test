@@ -206,7 +206,6 @@ selectTypeClient.addEventListener('change', function () {
         idLastName.style.display = 'block';
     }
 });
-
 //enviando formulario
 function sendForm(e) {
     e.preventDefault();
@@ -214,8 +213,8 @@ function sendForm(e) {
         title: 'Desea emitir el comprobante?',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Guardado',
-        denyButtonText: `No guardado`,
+        confirmButtonText: 'Registrar',
+        denyButtonText: `No registrar`,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
