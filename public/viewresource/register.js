@@ -7,32 +7,48 @@ window.onload = function () {
     dni.addEventListener('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
-    //crea una función que haga peticiones a la ruta '/search', cada vez que se escriba en un input con id 'idSearchProduct
-    // const token = document.getElementById('idTokenCsrf').value;
-    // const search = document.getElementById('idSearchProduct');
-    // const selectProduto = document.getElementById('idSearchProducto');
-    // search.addEventListener('input', function() {
-    //         fetch('/search', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'X-CSRF-TOKEN': token,
-    //               },
-    //             body: JSON.stringify({
-    //                 search: search.value
-    //             })
-    //         })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             selectProduto.innerHTML = 'xd';//para limpiar el select
-    //             data.forEach(element => {
-    //                 const option = document.createElement('option');
-    //                 option.value = element.nameProduct;//para el value del option
-    //                 option.innerHTML = element.nameProduct;//
-    //                 selectProduto.appendChild(option);
-    //             });
-    //         });  
-    // });
+    // crea una función que haga peticiones a la ruta '/search', cada vez que se escriba en un input con id 'idSearchProduct
+    const token = document.getElementById('idTokenCsrf').value;
+    const search = document.getElementById('inptSearch');
+    const selectDiv = document.querySelector('.options-container');
+
+        search.addEventListener('input', function() {
+            console.log((search.value).length);
+            if((search.value).length > 2){
+                fetch('/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token,
+                    },
+                    body: JSON.stringify({
+                        search: search.value
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    selectDiv.innerHTML = ' ';//para limpiar el select
+                    data.forEach(element => {
+                            const div = document.createElement('div');
+                            const input = document.createElement('input');
+                            const label = document.createElement('label');
+                            div.className = 'option';
+                            input.type = 'radio';
+                            input.className = 'radio';
+                            input.id = element.idProducto;
+                            input.name = 'category';
+                            label.innerHTML = element.nameProduct;
+                            // option.value = element.nameProduct;//para el value del option
+                            // option.innerHTML = element.nameProduct;//
+                            div.appendChild(input);
+                            div.appendChild(label);
+                            selectDiv.appendChild(div);
+                    });
+                });  
+            }
+            selectDiv.innerHTML = ' ';//para limpiar el select 
+            selectDiv.innerHTML = 'ingrese al menos 2 caracteres'
+        });
 
     const selectDivSearch = document.querySelector('.selected');
     const table = document.getElementById('idTable');

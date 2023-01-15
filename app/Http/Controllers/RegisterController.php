@@ -68,6 +68,7 @@ class RegisterController extends Controller
                 }
                 date_default_timezone_set('America/Lima');
 
+                
                 // $tventa->idVenta = uniqid();
                 $tventa->idProducto = uniqid();
                 $tventa->comprobante = $request->comprobanteBoleta;
@@ -84,7 +85,7 @@ class RegisterController extends Controller
                 $tventa->igv = $request->idTotalCobrar * 18/100;
                 $tventa->subTotal = $request->idTotalCobrar - $tventa->igv;
                 $tventa->priceTotal = $request->idTotalCobrar;
-                $tventa->productoCantidad = json_encode($arrProductos, JSON_UNESCAPED_UNICODE);//el json_unescaped.. para que permita caracters unicode(tidles,etc)
+                $tventa->productoCantidad = implode(",",$arrProductos);//el json_unescaped.. para que permita caracters unicode(tidles,etc)
                 $tventa->save();
                 
 
@@ -100,8 +101,6 @@ class RegisterController extends Controller
             }
         }
         $venta = TVenta::find('2');
-        $json = json_decode($venta->productoCantidad);
-        $venta->productoCantidad = json_encode($json);
         return view('user.registrarVenta', compact('venta'));
     }
     public function actionList()

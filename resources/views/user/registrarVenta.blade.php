@@ -61,7 +61,7 @@
                     </select> --}}
                     <div class="select-box">
                         <div class="options-container">
-                            <div class="option">
+                            {{-- <div class="option">
                                 <input type="radio" class="radio" id="automobiles" name="category" />
                                 <label for="cevicheSimple">ceviche simple</label>
                             </div>
@@ -77,13 +77,13 @@
                             <div class="option">
                                 <input type="radio" class="radio" id="film" name="category" />
                                 <label for="chicharronPescado">Chicharrón de pescado</label>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="selected">...</div>
 
                         <div class="search-box">
-                            <input type="text" placeholder="Escriba aquí..." />
+                            <input type="text" id="inptSearch" placeholder="Escriba aquí..." />
                         </div>
                     </div>
             </div>
@@ -129,10 +129,11 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"  id="miForm" onclick="sendForm(event)">Registrar</button>
                     </div>
+
         </form>
     </div>
     <script>
-      console.log(JSON.stringify({{json_encode($venta->productoCantidad)}}))
+      console.log(JSON.stringify({{json_encode($venta->productoCantidad)}}));
 
         const json = JSON.parse(JSON.stringify(string));
 
