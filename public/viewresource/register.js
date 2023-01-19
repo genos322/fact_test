@@ -1,19 +1,21 @@
 'use strict';
-// crea una funció que cargue al renderizar la página sin jQuery
+
+
+
 window.onload = function () {
-    const dni = document.getElementById('idDni');
-    const nameClient = document.getElementById('idNameClient');
-    //crea una validación para el campo dni, que admita solo números
-    dni.addEventListener('input', function () {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    });
+    // const dni = document.getElementById('idDni');
+    // const nameClient = document.getElementById('idNameClient');
+    // //crea una validación para el campo dni, que admita solo números
+    // dni.addEventListener('input', function () {
+    //     this.value = this.value.replace(/[^0-9]/g, '');
+    // });
     // crea una función que haga peticiones a la ruta '/search', cada vez que se escriba en un input con id 'idSearchProduct
     const token = document.getElementById('idTokenCsrf').value;
     const search = document.getElementById('inptSearch');
     const selectDiv = document.querySelector('.options-container');
 
         search.addEventListener('input', function() {
-            console.log((search.value).length);
+            
             if((search.value).length > 2){
                 fetch('/search', {
                     method: 'POST',
@@ -31,29 +33,102 @@ window.onload = function () {
                     data.forEach(element => {
                             const div = document.createElement('div');
                             const input = document.createElement('input');
+                            const inputPrice = document.createElement('input');
                             const label = document.createElement('label');
                             div.className = 'option';
+                            div.id = element.idProducto;
                             input.type = 'radio';
                             input.className = 'radio';
-                            input.id = element.idProducto;
                             input.name = 'category';
+                            input.id =element.idProducto;
+                            input.value = element.nameProduct;
+                            inputPrice.type = 'hidden';
+                            inputPrice.id = 'idPrice';
+                            inputPrice.value = element.priceUnit;
                             label.innerHTML = element.nameProduct;
-                            // option.value = element.nameProduct;//para el value del option
-                            // option.innerHTML = element.nameProduct;//
                             div.appendChild(input);
+                            div.appendChild(inputPrice);
                             div.appendChild(label);
                             selectDiv.appendChild(div);
                     });
+                    selectOh();//para volver a ejecutar el script del select
+
                 });  
             }
-            selectDiv.innerHTML = ' ';//para limpiar el select 
+            selectDiv.innerHTML = ' ';//para limpiar el select en caso de estar vacío el search
             selectDiv.innerHTML = 'ingrese al menos 2 caracteres'
+           
         });
+    
+    //para la primera carga y las posteriores cuando se pierda el foco. Tiene un bug, se debe hacer 2 veces click para que funcionen las opciones,
+    //esto se debe a la función que se llama, ya que ahí tmb genera otro eevento click, pero no se como solucionarlo xd
+    const divOptionConta = document.querySelector('.selected');
+    divOptionConta.addEventListener('click', ()=> {
+        console.log('click');
+    selectOh();
+    });
+    //función para volver a ejecutar el script del select, está mal, pero funciona :v
+    function selectOh()
+    {
+        const selectedAll = document.querySelectorAll(".selected");
+
+        selectedAll.forEach((selected) => {
+            const optionsContainer = selected.previousElementSibling;
+            const searchBox = selected.nextElementSibling;
+
+            const optionsList = optionsContainer.querySelectorAll(".option");
+
+            selected.addEventListener("click", () => {
+                if (optionsContainer.classList.contains("active")) {
+                    optionsContainer.classList.remove("active");
+                } else {
+                    let currentActive = document.querySelector(".options-container.active");
+
+                    if (currentActive) {
+                        currentActive.classList.remove("active");
+                    }
+
+                    optionsContainer.classList.add("active");
+                }
+
+                searchBox.value = "";
+                filterList("");
+
+                if (optionsContainer.classList.contains("active")) {
+                    searchBox.focus();
+                }
+            });
+
+            optionsList.forEach((o) => {
+                o.addEventListener("click", () => {
+                    selected.innerHTML = o.querySelector("label").innerHTML;
+                    optionsContainer.classList.remove("active");
+                });
+            });
+
+            searchBox.addEventListener("keyup", function(e) {
+                filterList(e.target.value);
+            });
+
+            const filterList = (searchTerm) => {
+                searchTerm = searchTerm.toLowerCase();
+                optionsList.forEach((option) => {
+                    let label = option.firstElementChild.nextElementSibling.innerText.toLowerCase();
+                    if (label.indexOf(searchTerm) != -1) {
+                        option.style.display = "block";
+                    } else {
+                        option.style.display = "none";
+                    }
+                });
+            };
+        });
+    }
+    //insertando a la tabla
 
     const selectDivSearch = document.querySelector('.selected');
     const table = document.getElementById('idTable');
     // const nameCelda = table.querySelector("tr:first-child td:nth-child(1)");
-    const cantidadCelda = table.querySelector("tr:first-child td:nth-child(2)");
+    // const cantidadCelda = table.querySelector("tr:first-child td:nth-child(2)");
 
     let addTotal = 0;//variable para sumar el total
     selectDivSearch.addEventListener('DOMSubtreeModified', function () {
@@ -76,7 +151,7 @@ window.onload = function () {
                 tdSubtotalProducto.id = selectDivSearch.innerHTML.split(' ').join('') + 'Subtotal';
                 tdIgv.id = selectDivSearch.innerHTML.split(' ').join('') + 'Igv';
                 tdTotal.id = selectDivSearch.innerHTML.split(' ').join('') + 'Total';
-
+                
                 if (selectDivSearch.innerHTML.split(' ').join('') == 'cevichemixto') {
                     tdPrecioProducto.innerHTML = 20;
                     tdSubtotalProducto.innerHTML = parseFloat(tdPrecioProducto.innerHTML) - (parseFloat(tdPrecioProducto.innerHTML) * 18 / 100);

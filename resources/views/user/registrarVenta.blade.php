@@ -55,29 +55,8 @@
             </div>
             <div class="secondCol">
                 <div class="form-group searchBox">
-                    {{-- <input type="text" placeholder="Busca prouducto..." id="idSearchProduct" style="position: relative">
-                    <select name="selectSearch" id="idSearchProducto" style="width:20px;">
-                        <option value="..." id="idOptionProducto">...</option>
-                    </select> --}}
                     <div class="select-box">
                         <div class="options-container">
-                            {{-- <div class="option">
-                                <input type="radio" class="radio" id="automobiles" name="category" />
-                                <label for="cevicheSimple">ceviche simple</label>
-                            </div>
-
-                            <div class="option">
-                                <input type="radio" class="radio" id="film" name="category" />
-                                <label for="cevicheMixto">ceviche mixto</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" class="radio" id="film" name="category" />
-                                <label for="arrozMarisco">arroz con mariscos</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" class="radio" id="film" name="category" />
-                                <label for="chicharronPescado">Chicharrón de pescado</label>
-                            </div> --}}
                         </div>
 
                         <div class="selected">...</div>
@@ -86,7 +65,7 @@
                             <input type="text" id="inptSearch" placeholder="Escriba aquí..." />
                         </div>
                     </div>
-            </div>
+                </div>
                     <table class="table" id="idTable">
                         <thead>
                             <tr>
@@ -133,68 +112,10 @@
         </form>
     </div>
     <script>
-      console.log(JSON.stringify({{json_encode($venta->productoCantidad)}}));
-
-        const json = JSON.parse(JSON.stringify(string));
-
-        json.forEach(function(item) {
-        console.log(item);
-        });
 
     </script>
     <script>
-        const selectedAll = document.querySelectorAll(".selected");
 
-        selectedAll.forEach((selected) => {
-            const optionsContainer = selected.previousElementSibling;
-            const searchBox = selected.nextElementSibling;
-
-            const optionsList = optionsContainer.querySelectorAll(".option");
-
-            selected.addEventListener("click", () => {
-                if (optionsContainer.classList.contains("active")) {
-                    optionsContainer.classList.remove("active");
-                } else {
-                    let currentActive = document.querySelector(".options-container.active");
-
-                    if (currentActive) {
-                        currentActive.classList.remove("active");
-                    }
-
-                    optionsContainer.classList.add("active");
-                }
-
-                searchBox.value = "";
-                filterList("");
-
-                if (optionsContainer.classList.contains("active")) {
-                    searchBox.focus();
-                }
-            });
-
-            optionsList.forEach((o) => {
-                o.addEventListener("click", () => {
-                    selected.innerHTML = o.querySelector("label").innerHTML;
-                    optionsContainer.classList.remove("active");
-                });
-            });
-
-            searchBox.addEventListener("keyup", function(e) {
-                filterList(e.target.value);
-            });
-
-            const filterList = (searchTerm) => {
-                searchTerm = searchTerm.toLowerCase();
-                optionsList.forEach((option) => {
-                    let label = option.firstElementChild.nextElementSibling.innerText.toLowerCase();
-                    if (label.indexOf(searchTerm) != -1) {
-                        option.style.display = "block";
-                    } else {
-                        option.style.display = "none";
-                    }
-                });
-            };
-        });
     </script>
     <script src="{{ asset('viewresource/register.js') }}"></script>
 @endsection

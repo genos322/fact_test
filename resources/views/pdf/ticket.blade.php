@@ -59,23 +59,36 @@
         </div>
     </div>
     <hr>
-    <br>
-    {{-- <div >
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-            <tbody>
-    
-            </tbody>
-        </table>
-    
-        <p>Total: {{ $venta->priceTotal }}</p>
-    </div> --}}
+    <div style="position: absolute;">
+        <p style="font-family: monospace;font-size: 12px; margin-top: 0px">
+            <b>Producto</b>
+        </p>
+        <p style="position: relative; left: 210px; bottom: 25px; font-family: monospace;font-size: 12px">
+            <b>Total</b>
+        </p>
+        <p style=" position: relative; font-family: monospace;font-size: 12px;  left: 125px ; bottom: 50px">
+            <b>Cantidad</b>
+        </p>
+            @foreach(explode(',',$venta->productoCantidad) as $prod)
+            @php 
+            $arr = explode('Cantidad',$prod);
+            @endphp   
+            <p style="position: relative;font-family: monospace;font-size: 11px;bottom: 50px">
+                    {{ $arr[0] }}
+            </p>            
+            @endforeach
+    </div>
+    <div style="position: absolute">
+            @foreach(explode(',',$venta->productoCantidad) as $prod)
+            @php 
+            $arr = explode('Cantidad',$prod);
+            @endphp 
+            <p style="position: relative;font-family: monospace;font-size: 11px;left: 160px;top: 10px">
+                {{ $arr[1] }}
+            </p>
+            @endforeach
+    </div>
+
 
 </body>
 

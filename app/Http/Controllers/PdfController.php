@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use PDF;
 
-use DB;
 
 
 use App\Models\TVenta;
